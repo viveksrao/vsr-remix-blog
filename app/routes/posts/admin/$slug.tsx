@@ -17,7 +17,6 @@ import {
 } from "~/models/post.server";
 import invariant from "tiny-invariant";
 import { requireAdminUser } from "~/session.server";
-import { useEffect } from "react";
 
 type LoaderData = { post?: Post };
 
