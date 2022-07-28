@@ -17,6 +17,7 @@ import {
 } from "~/models/post.server";
 import invariant from "tiny-invariant";
 import { requireAdminUser } from "~/session.server";
+import { useEffect } from "react";
 
 type LoaderData = { post?: Post };
 
@@ -84,6 +85,7 @@ const inputClassName = `w-full rounded border border-gray-500 px-2 py-1 text-lg`
 export default function NewPostRoute() {
   const data = useLoaderData() as LoaderData;
   const errors = useActionData() as ActionData;
+  
 
   const transition = useTransition();
   const isCreating = transition.submission?.formData.get("intent") === "create";
@@ -173,4 +175,16 @@ export function CatchBoundary() {
     );
   }
   throw new Error(`Unsupported thrown response status code: ${caught.status}`);
+}
+
+export function ErrorBoundary({ error }: { error: unknown }) {
+  if (error instanceof Error) {
+    return (
+      <div className="text-red-500">
+        Oh no, something went wrong!
+        <pre>{error.message}</pre>
+      </div>
+    );
+  }
+  return <div className="text-red-500">Oh no, something went wrong!</div>;
 }
