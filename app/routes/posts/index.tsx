@@ -25,6 +25,7 @@ export default function Posts() {
           <li key={post.slug}>
             <Link
               to={post.slug}
+              prefetch="intent"
               className="font-mono text-2xl text-blue-600 underline"
             >
               {post.title}
