@@ -3,7 +3,6 @@ import type { LoaderFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { getPostListings } from "~/models/post.server";
 
-
 type LoaderData = {
   posts: Awaited<ReturnType<typeof getPostListings>>;
 };
@@ -18,6 +17,9 @@ export default function Posts() {
   return (
     <main>
       <h1 className="font-mono text-4xl">Posts</h1>
+      <Link to="admin" className="font-mono text-xl text-rose-900 no-underline">
+        Admin
+      </Link>
       <ul>
         {posts.map((post) => (
           <li key={post.slug}>
